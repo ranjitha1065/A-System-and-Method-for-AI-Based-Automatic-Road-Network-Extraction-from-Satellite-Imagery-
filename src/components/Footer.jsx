@@ -1,0 +1,2 @@
+import { Code2, Heart } from 'lucide-react';
+export default function Footer() { return <footer className="relative z-10 border-t border-white/10 px-6 py-7 text-center text-sm text-slate-500">Made with React + TensorFlow + U-Net <Heart className="mx-1 inline text-orange-400" size={14}/><a className="ml-4 inline-flex items-center gap-1 hover:text-white" href="https://github.com"><Code2 size={14}/>GitHub</a><span className="ml-4">© 2026 RoadAI</span></footer>; }

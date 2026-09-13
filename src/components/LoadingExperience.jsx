@@ -1,0 +1,3 @@
+import { motion } from 'framer-motion';
+const stages = ['Analyzing satellite image…', 'Extracting road network…', 'Generating road mask…'];
+export default function LoadingExperience({ stage }) { return <div className="mt-6 rounded-3xl border border-violet-300/20 bg-violet-300/5 p-6"><div className="flex items-center gap-5"><div className="progress-ring"><span>{Math.round(((stage + 1) / stages.length) * 100)}%</span></div><div><p className="font-bold">{stages[stage]}</p><div className="mt-3 flex gap-2">{stages.map((text,index) => <motion.span key={text} animate={{opacity:index <= stage ? 1 : .25, scale:index === stage ? 1.1 : 1}} className="h-1.5 w-9 rounded-full gradient-button"/>)}</div></div></div></div>; }

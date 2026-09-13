@@ -1,0 +1,8 @@
+import { useState } from 'react';
+import { motion } from 'framer-motion';
+
+export default function ComparisonSlider({ original, overlay, onOpen }) {
+  const [value, setValue] = useState(50);
+  if (!original || !overlay) return null;
+  return <section className="mt-5 overflow-hidden rounded-3xl border border-white/10 bg-slate-950/30"><div className="flex items-center justify-between px-5 py-4"><div><p className="text-xs font-bold uppercase tracking-[.18em] text-violet-300">Interactive comparison</p><h3 className="mt-1 font-bold">Before / After</h3></div><span className="text-xs text-slate-400">Drag to compare</span></div><div className="relative aspect-[16/8] overflow-hidden"><img src={original} alt="Original image" className="h-full w-full object-cover" onClick={() => onOpen(original, 'Original Image')}/><div className="absolute inset-y-0 left-0 overflow-hidden" style={{ width: `${value}%` }}><img src={overlay} alt="Road overlay" className="h-full max-w-none object-cover" style={{ width: `${10000 / value}%` }} onClick={() => onOpen(overlay, 'Road Overlay')}/></div><div className="absolute inset-y-0 w-0.5 bg-white shadow-[0_0_15px_white]" style={{ left: `${value}%` }}><motion.div drag="x" dragConstraints={{ left: -500, right: 500 }} onDrag={(_, info) => setValue(Math.max(3, Math.min(97, value + info.delta.x / 7)))} className="absolute top-1/2 -left-4 grid h-8 w-8 -translate-y-1/2 cursor-ew-resize place-items-center rounded-full bg-white text-slate-900">↔</motion.div></div><input aria-label="Comparison position" value={value} onChange={event => setValue(Number(event.target.value))} type="range" min="3" max="97" className="absolute inset-0 h-full w-full cursor-ew-resize opacity-0"/></div></section>;
+}

@@ -1,0 +1,2 @@
+import { motion } from 'framer-motion';
+export default function FeatureCard({icon:Icon,title,text,index}) { return <motion.article initial={{opacity:0,y:22}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{delay:index*.1}} whileHover={{y:-8}} className="glass group rounded-3xl p-6"><div className="mb-5 grid h-12 w-12 place-items-center rounded-2xl bg-gradient-to-br from-violet/70 to-sunset/70 shadow-glow"><Icon size={23}/></div><h3 className="mb-2 text-lg font-bold">{title}</h3><p className="text-sm leading-6 text-slate-400">{text}</p></motion.article>; }
