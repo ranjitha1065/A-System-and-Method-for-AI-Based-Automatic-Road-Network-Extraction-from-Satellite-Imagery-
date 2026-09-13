@@ -1,6 +1,6 @@
 """Flask API exposing the trained RoadAI U-Net to the React frontend."""
 from __future__ import annotations
-
+import os
 import base64
 import sys
 import traceback
@@ -60,7 +60,14 @@ MODEL = _load_model_once()
 app = Flask(__name__)
 app.config["MAX_CONTENT_LENGTH"] = 100 * 1024 * 1024
 # Vite uses 5173 by default but moves to 5174+ when that port is occupied.
-CORS(app, resources={r"/*": {"origins": r"^http://(localhost|127\.0\.0\.1):\d+$"}})
+CORS(
+    app,
+    resources={
+        r"/*": {
+            "origins": os.getenv("CORS_ORIGIN", "*")
+        }
+    }
+)
 
 
 @app.get("/")
