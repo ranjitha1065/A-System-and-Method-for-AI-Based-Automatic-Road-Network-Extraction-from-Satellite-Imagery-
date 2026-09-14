@@ -35,8 +35,15 @@ from utils import clean_mask  # noqa: E402
 # Set ROADAI_MODEL to opt into a validated candidate.
 MODEL_PATH = CONFIG_MODEL_PATH
 
-UPLOAD_DIR = BACKEND_DIR / "uploads"
-OUTPUT_DIR = BACKEND_DIR / "outputs"
+# Vercel serverless functions have a read-only deployment filesystem.
+# /tmp is writable during the function lifetime. Keep local development
+# behavior unchanged.
+if os.getenv("VERCEL"):
+    UPLOAD_DIR = Path("/tmp/road_ai_uploads")
+    OUTPUT_DIR = Path("/tmp/road_ai_outputs")
+else:
+    UPLOAD_DIR = BACKEND_DIR / "uploads"
+    OUTPUT_DIR = BACKEND_DIR / "outputs"
 
 ALLOWED_EXTENSIONS = {
     ".tif",
